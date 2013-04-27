@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        >
+
+    <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/langChooserSpinner"
+            android:layout_gravity="center_horizontal|right"/>
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/prompt"
+            android:id="@+id/textToTranslate"/>
+
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:id="@+id/space"/>
+
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Translate"
+            android:id="@+id/translateButton"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:typeface="monospace"
+            android:onClick="onTranslateClicked"/>
+
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:id="@+id/space1"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/translatedTextView"/>
+
+</LinearLayout>
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YaTranslate</string>
+    <string name="prompt">Enter text</string>
+    <string name="network_error_title">Network error</string>
+    <string name="network_error">You are not connected to the Internet!</string>
+    <string name="user_agent">AndroidTranslater</string>
+    <string name="yandex_translate_host">"translate.yandex.net"</string>
+    <string name="yandex_translate_api_request">"/api/v1/tr.json/"</string>
+    <string name="get_langs_request_url">"getLangs"</string>
+    <string name="translate_request_url">"translate"</string>
+</resources>
