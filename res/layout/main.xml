@@ -37,10 +37,20 @@
             android:layout_height="10dp"
             android:id="@+id/space1"/>
 
+    <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/translateProgress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:visibility="gone"
+            android:indeterminate="true"/>
+
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/translatedTextView"/>
+            android:id="@+id/translatedTextView"
+            android:textSize="36dp"
+            />
 
 </LinearLayout>
 

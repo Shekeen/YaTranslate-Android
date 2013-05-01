@@ -25,14 +25,23 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.DefaultHttpRequestFactory;
 
-public class TranslateActivity extends Activity {
+interface OnTranslateCompleted {
+    void onTaskCompleted();
+}
+
+public class TranslateActivity extends Activity implements OnTranslateCompleted {
     private Spinner langChooser;
     private String selectedTranslateDirection;
     private EditText textToTranslate;
     private TextView translatedText;
+    private ProgressBar translateProgress;
     private HttpHost yandexTranslateHost;
     private DefaultHttpRequestFactory httpRequestFactory;
     private AndroidHttpClient httpClient;
+
+    public void onTaskCompleted() {
+        translateProgress.setVisibility(View.GONE);
+    }
 
     private class LangChooserOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
         @Override
@@ -131,6 +140,12 @@ public class TranslateActivity extends Activity {
     }
 
     private class BackgroundTranslation extends AsyncTask<String, Void, String> {
+        private OnTranslateCompleted listener;
+
+        public BackgroundTranslation(OnTranslateCompleted listener) {
+            this.listener = listener;
+        }
+
         @Override
         protected String doInBackground(String... forTranslation) {
             String translatedText = "";
@@ -171,6 +186,7 @@ public class TranslateActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             translatedText.setText(result);
+            listener.onTaskCompleted();
         }
     }
 
@@ -185,6 +201,7 @@ public class TranslateActivity extends Activity {
         langChooser = (Spinner)findViewById(R.id.langChooserSpinner);
         textToTranslate = (EditText)findViewById(R.id.textToTranslate);
         translatedText = (TextView)findViewById(R.id.translatedTextView);
+        translateProgress = (ProgressBar)findViewById(R.id.translateProgress);
 
         try {
             yandexTranslateHost = new HttpHost(getString(R.string.yandex_translate_host));
@@ -220,6 +237,7 @@ public class TranslateActivity extends Activity {
      * Translate button clicked
      */
     public void onTranslateClicked(View v) {
-        new BackgroundTranslation().execute(textToTranslate.getText().toString());
+        translateProgress.setVisibility(View.VISIBLE);
+        new BackgroundTranslation(this).execute(textToTranslate.getText().toString());
     }
 }
